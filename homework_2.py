@@ -9,9 +9,9 @@ class Person:
         print(f"I was born on {self.birth_date}.\n")
         print(f"{self.occupation} is my occupation\n")
         if self.higher_education:
-            print("I do have a higher education\n\n")
+            print("I do have a higher education\n")
         else:
-            print("I do not have a higher education\n\n")
+            print("I do not have a higher education\n")
 
 class Classmate(Person):
     def __init__(self, name: str, birth_date: str, occupation: str, higher_education: bool, group_name: str):
@@ -32,4 +32,9 @@ class Friend(Person):
 classmate1 = Classmate("Harry", "19.01.1993", "teacher", False, "A1")
 classmate2 = Classmate("Hermione", "23.01.2001", "student", False, "A2")
 friend1 = Friend("Gabe", "23.06.1995", "Gamer", True, "Games")
-friend2 = Friend("David", "67.31.1999", "Preacher", True, "children")
+friend2 = Friend("David", "67.31.1999", "Preacher", True, "dancing :)")
+person1 = Person("Oliver", "19.01.1983", "IT", True)
+person2 = Person("Alice", "15.06.2013", "child", False)
+for i in [classmate1, classmate2, friend1, friend2, person1, person2]:
+    i.introduce()
+    print("\n")
