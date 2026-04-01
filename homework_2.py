@@ -29,6 +29,14 @@ class Friend(Person):
         super().introduce()
         print(f'My hobby is {self.hobby}\n')
 
+class BestFriend(Friend):
+    def __init__(self, name: str, birth_date: str, occupation: str, higher_education: bool, hobby: str, shared_memory: str):
+        super().__init__(name, birth_date, occupation, higher_education,hobby)
+        self.shared_memory = shared_memory
+    def introduce(self):
+        super().introduce()
+        print(f'Our shared memory is {self.shared_memory}\n')
+
 classmate1 = Classmate("Harry", "19.01.1993", "teacher", False, "A1")
 classmate2 = Classmate("Hermione", "23.01.2001", "student", False, "A2")
 friend1 = Friend("Gabe", "23.06.1995", "Gamer", True, "Games")
@@ -38,3 +46,5 @@ person2 = Person("Alice", "15.06.2013", "child", False)
 for i in [classmate1, classmate2, friend1, friend2, person1, person2]:
     i.introduce()
     print("\n")
+bfriend = BestFriend("Artem", "23.06.2004", "Gamer", True, "Games", "cs2")
+bfriend.introduce()
