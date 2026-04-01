@@ -37,14 +37,26 @@ class BestFriend(Friend):
         super().introduce()
         print(f'Our shared memory is {self.shared_memory}\n')
 
-classmate1 = Classmate("Harry", "19.01.1993", "teacher", False, "A1")
-classmate2 = Classmate("Hermione", "23.01.2001", "student", False, "A2")
-friend1 = Friend("Gabe", "23.06.1995", "Gamer", True, "Games")
-friend2 = Friend("David", "67.31.1999", "Preacher", True, "dancing :)")
-person1 = Person("Oliver", "19.01.1983", "IT", True)
-person2 = Person("Alice", "15.06.2013", "child", False)
+class Factory:
+    types = {
+        "person": Person,
+        "bestFriend": BestFriend,
+        "friend": Friend,
+        "classmate": Classmate
+    }
+    def create(self, type, **kwargs):
+        return self.types[type](**kwargs)
+
+
+factory = Factory()
+classmate1 = factory.create(type = "classmate",name = "Harry", birth_date = "19.01.1993", occupation = "teacher", higher_education = False, group_name = "A1")
+classmate2 = factory.create("classmate",name = "Hermione", birth_date ="23.01.2001", occupation = "student", higher_education =False, group_name = "A2")
+friend1 = factory.create(type="friend",name="Gabe",birth_date="23.06.1995",occupation="Gamer",higher_education=True,hobby="Games")
+friend2 = factory.create(type="friend",name="David",birth_date="67.31.1999",occupation="Preacher",higher_education=True,hobby="dancing :)")
+person1 = factory.create(type="person",name="Oliver",birth_date="19.01.1983",occupation="IT",higher_education=True)
+person2 = factory.create(type="person",name="Alice",birth_date="15.06.2013",occupation="child",higher_education=False)
 for i in [classmate1, classmate2, friend1, friend2, person1, person2]:
     i.introduce()
     print("\n")
-bfriend = BestFriend("Artem", "23.06.2004", "Gamer", True, "Games", "cs2")
+bfriend = factory.create(type="bestFriend",name="Artem",birth_date="23.06.2004",occupation="Gamer",higher_education=True,hobby="Games",shared_memory="cs2")
 bfriend.introduce()
