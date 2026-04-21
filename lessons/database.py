@@ -8,7 +8,6 @@ def create_table_students(conn, table_name):
     age INTEGER NOT NULL,
     city TEXT NOT NULL)
     ''')
-    conn.commit()
 
 def delete_table(conn, table_name):
     conn.execute(f'''
@@ -25,8 +24,25 @@ def insert_student(conn, name, age: int, city):
 
 def get_all_students(conn):
     result = conn.execute('SELECT * FROM students')
-    conn.commit()
     return result.fetchall()
+
+def get_student_by_name(conn, name):
+    result = conn.execute('SELECT * FROM students WHERE name = ?', (name,))
+    return result.fetchone()
+
+def get_student_by_id(conn, student_id):
+    result = conn.execute('SELECT * FROM students WHERE id = ?', (student_id,))
+    return result.fetchone()
+
+def delete_student(conn, student_id):
+    conn.execute(f'''
+    DELETE FROM students WHERE id = ?''', (student_id,))
+    conn.commit()
+
+def change_student(conn, student_id, name, age, city):
+    conn.execute(f'''
+    UPDATE students SET name = ?, age = ?, city = ? WHERE id = ?'''), (name, age, city, student_id)
+    conn.commit()
 
 def create_table_books(conn, table_name):
     conn.execute(f'''
@@ -37,7 +53,6 @@ def create_table_books(conn, table_name):
     genre TEXT NOT NULL,
     number_of_pages INTEGER NOT NULL,
     number_of_copies INTEGER NOT NULL)''')
-    conn.commit()
 
 def insert_books(conn, name, author, publication_year, genre, number_of_pages, number_of_copies):
     conn.execute(
@@ -47,6 +62,5 @@ def insert_books(conn, name, author, publication_year, genre, number_of_pages, n
 
 def get_all_books(conn):
     result = conn.execute('SELECT * FROM books')
-    conn.commit()
     return result.fetchall()
 
