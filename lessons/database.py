@@ -41,12 +41,13 @@ def delete_student(conn, student_id):
 
 def change_student(conn, student_id, name, age, city):
     conn.execute(f'''
-    UPDATE students SET name = ?, age = ?, city = ? WHERE id = ?'''), (name, age, city, student_id)
+    UPDATE students SET name = ?, age = ?, city = ? WHERE id = ?''', (name, age, city, student_id))
     conn.commit()
 
 def create_table_books(conn, table_name):
     conn.execute(f'''
     CREATE TABLE IF NOT EXISTS {table_name} (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     author TEXT NOT NULL,
     publication_year INTEGER NOT NULL,
